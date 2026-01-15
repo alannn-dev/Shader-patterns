@@ -19,7 +19,12 @@ void main()
     // float strength = vUv.y * 10.0;
 
     // Pattern 7 : MODULO (Create repeating patterns like stripes or checkerboards)
+    // float strength = mod(vUv.y * 10.0, 1.0);
+
+    // Pattern 8
     float strength = mod(vUv.y * 10.0, 1.0);
+    // if value < 0.5 -> 0 : If value > 0.5 -> 1
+    strength = step(0.5, strength);
 
     gl_FragColor = vec4(strength, strength, strength, 1.0);
 }
