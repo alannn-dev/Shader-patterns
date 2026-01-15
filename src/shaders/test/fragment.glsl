@@ -22,9 +22,20 @@ void main()
     // float strength = mod(vUv.y * 10.0, 1.0);
 
     // Pattern 8
-    float strength = mod(vUv.y * 10.0, 1.0);
+        // float strength = mod(vUv.y * 10.0, 1.0);
     // if value < 0.5 -> 0 : If value > 0.5 -> 1
-    strength = step(0.5, strength);
+        // strength = step(0.5, strength);
+
+    // Pattern 9
+        // float strength = mod(vUv.y * 10.0, 1.0);
+    // if value < 0.5 -> 0 : If value > 0.5 -> 1
+        // strength = step(0.8, strength);
+
+    // Pattern 10
+        float strength = mod(vUv.x * 10.0, 1.0);
+    // if value < 0.5 -> 0 : If value > 0.5 -> 1
+        strength = step(0.8, strength);
+        
 
     gl_FragColor = vec4(strength, strength, strength, 1.0);
 }
