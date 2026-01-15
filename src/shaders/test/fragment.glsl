@@ -72,7 +72,11 @@ void main()
 
     // Pattern 17
     // min() : takes two arguments and returns the smaller of the two values.
-    float strength = min(abs(vUv.x - 0.5), abs(vUv.y - 0.5));
+    // float strength = min(abs(vUv.x - 0.5), abs(vUv.y - 0.5));
+
+    // Pattern 18
+    // max() : takes two arguments and returns the bigger of the two values.
+    float strength = max(abs(vUv.x - 0.5), abs(vUv.y - 0.5));
 
     gl_FragColor = vec4(strength, strength, strength, 1.0);
 }
