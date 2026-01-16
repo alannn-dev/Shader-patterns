@@ -1,89 +1,100 @@
+// Variable that will never change, saved as "defined"
+#define PI 3.1415926535897932384626433832795;
+
 varying vec2 vUv;
 // in vec2 vUv;
 
 // For pattern 22
-  float random(vec2 st)
-    {
-        return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-    }
+float random(vec2 st)
+{
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+vec2 rotate(vec2 uv, float rotation, vec2 mid)
+{
+return vec2(
+    cos(rotation) * (uv.x - mid.x) + sin(rotation) * (uv.y - mid.y) + mid.x,
+    cos(rotation) * (uv.y - mid.y) - sin(rotation) * (uv.x - mid.x) + mid.y
+);
+}
 
 void main()
 {
-    // // Pattern 1
+    // Pattern 1
     // gl_FragColor = vec4(vUv, 1.0, 1.0);
 
-    // // Pattern 2
+    // Pattern 2
     // gl_FragColor = vec4(vUv, 0.0, 1.0);
 
-    // // Pattern 3
+    // Pattern 3
     // float strength = vUv.x;
 
-    // // Pattern 4
+    // Pattern 4
     // float strength = vUv.y;
 
-    // // Pattern 5
+    // Pattern 5
     // float strength = 1.0 - vUv.y;
 
-    // // Pattern 6
+    // Pattern 6
     // float strength = vUv.y * 10.0;
 
-    // // Pattern 7
+    // Pattern 7
     // float strength = mod(vUv.y * 10.0, 1.0);
 
-    // // Pattern 8
+    // Pattern 8
     // float strength = mod(vUv.y * 10.0, 1.0);
     // strength = step(0.5, strength);
 
-    // // Pattern 9
+    // Pattern 9
     // float strength = mod(vUv.y * 10.0, 1.0);
     // strength = step(0.8, strength);
 
-    // // Pattern 10
+    // Pattern 10
     // float strength = mod(vUv.x * 10.0, 1.0);
     // strength = step(0.8, strength);
 
-    // // Pattern 11
+    // Pattern 11
     // float strength = step(0.8, mod(vUv.x * 10.0, 1.0));
     // strength += step(0.8, mod(vUv.y * 10.0, 1.0));
     // strength = clamp(strength, 0.0, 1.0);
 
-    // // Pattern 12
+    // Pattern 12
     // float strength = step(0.8, mod(vUv.x * 10.0, 1.0));
     // strength *= step(0.8, mod(vUv.y * 10.0, 1.0));
 
-    // // Pattern 13
+    // Pattern 13
     // float strength = step(0.4, mod(vUv.x * 10.0, 1.0));
     // strength *= step(0.8, mod(vUv.y * 10.0, 1.0));
 
-    // // Pattern 14
+    // Pattern 14
     // float barX = step(0.4, mod(vUv.x * 10.0, 1.0)) * step(0.8, mod(vUv.y * 10.0, 1.0));
     // float barY = step(0.8, mod(vUv.x * 10.0, 1.0)) * step(0.4, mod(vUv.y * 10.0, 1.0));
     // float strength = barX + barY;
     // strength = clamp(strength, 0.0, 1.0);
 
-    // // Pattern 15
+    // Pattern 15
     // float barX = step(0.4, mod(vUv.x * 10.0 - 0.2, 1.0)) * step(0.8, mod(vUv.y * 10.0, 1.0));
     // float barY = step(0.8, mod(vUv.x * 10.0, 1.0)) * step(0.4, mod(vUv.y * 10.0 - 0.2, 1.0));
     // float strength = barX + barY;
     // strength = clamp(strength, 0.0, 1.0);
 
-    // // Pattern 16
+    //Pattern 16
     // float strength = abs(vUv.x - 0.5);
 
-    // // Pattern 17
+    //Pattern 17
     // float strength = min(abs(vUv.x - 0.5), abs(vUv.y - 0.5));
 
-    // // Pattern 18
+    // Pattern 18
     // float strength = max(abs(vUv.x - 0.5), abs(vUv.y - 0.5));
 
-    // // Pattern 19
+    // Pattern 19
     // float strength = step(0.2, max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)));
 
-    // // Pattern 20
+    // Pattern 20
     // float strength = step(0.2, max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)));
     // strength *= 1.0 - step(0.25, max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)));
 
-    // // Pattern 21
+    // Pattern 21
     // float strength = floor(vUv.x * 10.0) / 10.0;
 
     // // Pattern 22
@@ -126,9 +137,14 @@ void main()
     float strength = 0.015 / distance(lightUv, vec2(0.5)); */
 
     // // Pattern 31
-    float strength = 0.15 / (distance(vec2(vUv.x, (vUv.y - 0.5) * 5.0 + 0.5), vec2(0.5)));
-    strength *= 0.15 / (distance(vec2(vUv.y, (vUv.x - 0.5) * 5.0 + 0.5), vec2(0.5)));
+    // float strength = 0.15 / (distance(vec2(vUv.x, (vUv.y - 0.5) * 5.0 + 0.5), vec2(0.5)));
+    // strength *= 0.15 / (distance(vec2(vUv.y, (vUv.x - 0.5) * 5.0 + 0.5), vec2(0.5)));
 
+    // Pattern 32
+    float pi = 3.1415926535897932384626433832795;
+    vec2 rotatedUv = rotate(vUv, pi * 0.25, vec2(0.5));
+    float strength = 0.15 / (distance(vec2(rotatedUv.x, (rotatedUv.y - 0.5) * 5.0 + 0.5), vec2(0.5)));
+    strength *= 0.15 / (distance(vec2(rotatedUv.y, (rotatedUv.x - 0.5) * 5.0 + 0.5), vec2(0.5)));
 
     gl_FragColor = vec4(strength, strength, strength, 1.0);
 }
