@@ -1,6 +1,12 @@
 varying vec2 vUv;
 // in vec2 vUv;
 
+// For pattern 22
+  float random(vec2 st)
+    {
+        return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+    }
+
 void main()
 {
     // Pattern 1 
@@ -89,6 +95,9 @@ void main()
     // Pattern 21
     float strength = floor(vUv.x * 10.0) / 10.0;
     strength *= floor(vUv.y * 10.0) / 10.0;
+
+    // Pattern 23
+    float strength = random(vUv);
 
     gl_FragColor = vec4(strength, strength, strength, 1.0);
 }
